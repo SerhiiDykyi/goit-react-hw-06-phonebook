@@ -64,8 +64,7 @@ class Form extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  onAddContact: (name, number) =>
-    dispatch(contactsActions.addContacts(name, number)),
+  onAddContact: contact => dispatch(contactsActions.addContacts(contact)),
 });
 
 export default connect(null, mapDispatchToProps)(Form);
