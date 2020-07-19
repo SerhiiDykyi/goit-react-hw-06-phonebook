@@ -14,11 +14,15 @@ npm install node-sass --save
 
 npm install react-router-dom
 
-npm install redux
+npm install redux npm install @reduxjs/toolkit
 
 npm install react-redux
 
-npm install --save-dev redux-devtools-extension
+<!-- npm install --save-dev redux-devtools-extension -->
+
+npm install redux-persist
+
+<!-- work with LS -->
 
 npm i shortid
 
@@ -47,3 +51,11 @@ netlify login
 <!-- scripts add -->
 
 "predeploy": "npm run build", "deploy": "netlify deploy -p"
+
+npm run deploy
+
+netlify open --site
+
+<!-- loger -->
+
+npm i --save redux-logger

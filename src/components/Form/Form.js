@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import contactsActions from '../../redux/contacts/contacts-actoins';
 import shortid from 'shortid';
 import './Form.scss';
 
@@ -21,8 +19,13 @@ class Form extends Component {
   handleSubmit = event => {
     event.preventDefault();
     const { onAddContact } = this.props;
-    onAddContact(this.state);
-    this.reset();
+
+    if (this.state.name !== '' && this.state.number !== '') {
+      onAddContact(this.state);
+      this.reset();
+      return;
+    }
+    alert('Please fill out the form');
   };
 
   reset = () => {
@@ -62,9 +65,4 @@ class Form extends Component {
     );
   }
 }
-
-const mapDispatchToProps = dispatch => ({
-  onAddContact: contact => dispatch(contactsActions.addContacts(contact)),
-});
-
-export default connect(null, mapDispatchToProps)(Form);
+export default Form;
