@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import contactsActions from '../../redux/contacts/contacts-actoins';
 import shortid from 'shortid';
 import './Form.scss';
+import { ToastContainer } from 'react-toastify';
+import { addSuccess, emptyForm, isExistContact } from './ToastersInfo';
 
 class Form extends Component {
   state = {
     name: '',
     number: '',
   };
-
   nameInputId = shortid.generate();
   namberInputId = shortid.generate();
 
@@ -20,9 +19,26 @@ class Form extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    const { onAddContact } = this.props;
-    onAddContact(this.state);
-    this.reset();
+    const { onAddContact, isExistName } = this.props;
+    const { name } = this.state;
+
+    const normalizedName = name.toLowerCase();
+    const isExist = isExistName.some(
+      item => item.name.toLowerCase() === normalizedName,
+    );
+    if (isExist) {
+      isExistContact(name);
+      this.reset();
+      return;
+    }
+
+    if (this.state.name !== '' && this.state.number !== '') {
+      onAddContact(this.state);
+      addSuccess();
+      this.reset();
+      return;
+    }
+    emptyForm();
   };
 
   reset = () => {
@@ -33,6 +49,7 @@ class Form extends Component {
     const { name, number } = this.state;
     return (
       <>
+        <ToastContainer />
         <form className="form_container" onSubmit={this.handleSubmit}>
           <p>Name</p>
           <label htmlFor={this.nameInputId}>
@@ -48,6 +65,8 @@ class Form extends Component {
             <input
               className="form_label"
               type="tel"
+              placeholder="000-00-00"
+              pattern="[0-9]{3}[-][0-9]{2}[-][0-9]{2}"
               name="number"
               value={number}
               onChange={this.handleChange}
@@ -62,9 +81,4 @@ class Form extends Component {
     );
   }
 }
-
-const mapDispatchToProps = dispatch => ({
-  onAddContact: contact => dispatch(contactsActions.addContacts(contact)),
-});
-
-export default connect(null, mapDispatchToProps)(Form);
+export default Form;
