@@ -59,3 +59,7 @@ netlify open --site
 <!-- loger -->
 
 npm i --save redux-logger
+
+<!-- spiner -->
+
+npm install react-loader-spinner --save
