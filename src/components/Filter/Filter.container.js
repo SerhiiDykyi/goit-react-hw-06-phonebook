@@ -4,6 +4,7 @@ import Filter from './Filter';
 
 const mapStateToProps = state => ({
   value: state.filter,
+  isLoadingContacts: state.contacts.loading,
 });
 
 const mapDispatchToProps = dispatch => ({

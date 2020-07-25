@@ -34,7 +34,7 @@ class Form extends Component {
 
     if (this.state.name !== '' && this.state.number !== '') {
       onAddContact(this.state);
-      addSuccess();
+      addSuccess(name);
       this.reset();
       return;
     }

@@ -1,8 +1,8 @@
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export const addSuccess = () =>
-  toast.success('Success, contact add!', {
+export const addSuccess = name =>
+  toast.success(`Success, ${name} add to contacts!`, {
     position: 'top-center',
     autoClose: 5000,
     hideProgressBar: false,
